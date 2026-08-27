@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HGHVIBES Goa — Parties. Weddings. Corporate. MICE.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+  :root{
+    --bg:#0a0a0c;
+    --bg-alt:#131317;
+    --bg-card:#17171c;
+    --silver:#c7ccd1;
+    --silver-bright:#f1f3f5;
+    --gold:#c79a56;
+    --gold-deep:#8f6b36;
+    --sunset:#e07b3f;
+    --sunset-deep:#a94c22;
+    --night:#1c2b3a;
+    --line: rgba(199,204,209,0.14);
+    --text-dim: rgba(241,243,245,0.62);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--silver-bright);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.04em;
+    font-weight:400;
+    line-height:1;
+    margin:0;
+  }
+  .eyebrow{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--gold);
+    letter-spacing:0.08em;
+    font-size:1.05rem;
+    margin-bottom:0.6rem;
+    display:block;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- horizon divider / signature element ---------- */
+  .horizon{
+    position:relative;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .horizon::before{
+    content:"";
+    position:absolute;
+    left:0; right:0; top:50%;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);
+  }
+  .horizon svg{ position:relative; z-index:1; background:var(--bg); padding:0 18px; }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(10,10,12,0.7);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand img{height:42px; width:42px; border-radius:50%; object-fit:cover;}
+  .brand span{font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.08em;}
+  .brand span em{font-style:normal; color:var(--gold);}
+  nav ul{display:flex; gap:32px; list-style:none; margin:0; padding:0;}
+  nav ul a{font-size:0.82rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-dim); transition:color .2s;}
+  nav ul a:hover{color:var(--silver-bright);}
+  .nav-cta{
+    border:1px solid var(--gold-deep);
+    padding:10px 22px;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    border-radius:2px;
+    transition:all .25s;
+  }
+  .nav-cta:hover{background:var(--gold); color:#0a0a0c;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--silver-bright); font-size:1.6rem; cursor:pointer;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 78%, rgba(224,123,63,0.20), transparent 70%),
+      linear-gradient(180deg, #0a0a0c 0%, #0d0d10 55%, #12141a 100%);
+    padding-top:76px;
+    overflow:hidden;
+  }
+  .hero-sun{
+    position:absolute;
+    bottom:-160px; left:50%; transform:translateX(-50%);
+    width:520px; height:520px;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 35%, var(--sunset) 0%, var(--sunset-deep) 55%, transparent 72%);
+    opacity:0.5;
+    filter:blur(2px);
+  }
+  .hero-content{position:relative; z-index:2; text-align:center; width:100%;}
+  .hero h1{
+    font-size:clamp(3.2rem, 9vw, 7.5rem);
+    color:var(--silver-bright);
+  }
+  .hero h1 .accent{color:var(--gold);}
+  .hero-sub{
+    max-width:560px; margin:26px auto 0;
+    color:var(--text-dim);
+    font-size:1.05rem;
+    line-height:1.7;
+  }
+  .hero-cities{
+    margin-top:20px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:1.1rem;
+    letter-spacing:0.04em;
+  }
+  .hero-ctas{display:flex; gap:18px; justify-content:center; margin-top:42px; flex-wrap:wrap;}
+  .btn{
+    padding:16px 34px;
+    font-size:0.82rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    border-radius:2px;
+    transition:all .25s;
+    display:inline-block;
+  }
+  .btn-primary{background:var(--gold); color:#0a0a0c; border:1px solid var(--gold);}
+  .btn-primary:hover{background:transparent; color:var(--gold);}
+  .btn-ghost{border:1px solid var(--line); color:var(--silver-bright);}
+  .btn-ghost:hover{border-color:var(--silver);}
+
+  .genre-strip{
+    position:relative; z-index:2;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:18px 0;
+    overflow:hidden;
+    white-space:nowrap;
+    margin-top:70px;
+  }
+  .genre-track{display:inline-block; animation:scroll 26s linear infinite;}
+  .genre-track span{
+    display:inline-block;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:1.4rem;
+    letter-spacing:0.1em;
+    color:var(--text-dim);
+    margin:0 28px;
+  }
+  .genre-track span em{font-style:normal; color:var(--gold); margin:0 28px 0 0;}
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  section{padding:110px 0;}
+  .section-head{text-align:center; max-width:640px; margin:0 auto 64px;}
+  .section-head h2{font-size:clamp(2.2rem,5vw,3.4rem); color:var(--silver-bright);}
+  .section-head p{color:var(--text-dim); margin-top:16px; line-height:1.7;}
+
+  /* ---------- services ---------- */
+  .services{background:var(--bg-alt);}
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--bg-alt);
+    padding:44px 34px;
+    transition:background .25s;
+  }
+  .service-card:hover{background:#191a1f;}
+  .service-num{font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold-deep); font-size:1rem;}
+  .service-card h3{font-size:1.9rem; margin:14px 0 12px; color:var(--silver-bright);}
+  .service-card p{color:var(--text-dim); font-size:0.95rem; line-height:1.7; margin:0;}
+
+  /* ---------- events / tickets ---------- */
+  .events-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .event-card{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .event-banner{
+    height:150px;
+    display:flex; align-items:flex-end; padding:16px;
+    position:relative;
+  }
+  .event-banner .tag{
+    background:rgba(10,10,12,0.6);
+    border:1px solid var(--gold-deep);
+    color:var(--gold);
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    padding:5px 12px;
+    border-radius:2px;
+  }
+  .event-body{padding:24px; flex:1; display:flex; flex-direction:column;}
+  .event-body h3{font-size:1.5rem; color:var(--silver-bright); margin-bottom:8px; font-family:'Jost',sans-serif; font-weight:500;}
+  .event-meta{color:var(--text-dim); font-size:0.85rem; margin-bottom:16px; line-height:1.6;}
+  .event-foot{
+    margin-top:auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:18px; border-top:1px solid var(--line);
+  }
+  .event-price{font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:var(--gold); letter-spacing:0.05em;}
+  .buy-btn{
+    background:transparent; border:1px solid var(--gold); color:var(--gold);
+    padding:10px 20px; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase;
+    cursor:pointer; border-radius:2px; transition:all .2s; font-family:'Jost',sans-serif;
+  }
+  .buy-btn:hover{background:var(--gold); color:#0a0a0c;}
+
+  /* ---------- cities ---------- */
+  .cities{background:var(--bg-alt);}
+  .city-row{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+  }
+  .city{
+    padding:38px 20px; text-align:center; border-right:1px solid var(--line);
+  }
+  .city:last-child{border-right:none;}
+  .city .display{font-size:2.2rem; color:var(--silver-bright);}
+  .city p{color:var(--text-dim); font-size:0.85rem; margin-top:6px;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;}
+  .about-grid img{width:100%; border-radius:6px; border:1px solid var(--line);}
+  .about-text p{color:var(--text-dim); line-height:1.8; margin-bottom:16px;}
+  .stat-row{display:flex; gap:44px; margin-top:34px;}
+  .stat .display{font-size:2.6rem; color:var(--gold);}
+  .stat p{color:var(--text-dim); font-size:0.8rem; margin-top:4px; letter-spacing:0.05em; text-transform:uppercase;}
+
+  /* ---------- contact / footer ---------- */
+  footer{background:var(--bg-alt); padding-top:100px; border-top:1px solid var(--line);}
+  .contact-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px;}
+  .contact-grid h2{font-size:clamp(2rem,5vw,3rem);}
+  .contact-grid p{color:var(--text-dim); margin-top:18px; line-height:1.7;}
+  form{display:flex; flex-direction:column; gap:16px; margin-top:8px;}
+  form input, form select, form textarea{
+    background:var(--bg-card); border:1px solid var(--line); color:var(--silver-bright);
+    padding:14px 16px; font-family:'Jost',sans-serif; font-size:0.92rem; border-radius:2px;
+  }
+  form textarea{resize:vertical; min-height:100px;}
+  form button{align-self:flex-start;}
+  .foot-bottom{
+    margin-top:90px; padding:26px 0; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+  .foot-bottom p{color:var(--text-dim); font-size:0.8rem; margin:0;}
+  .foot-social{display:flex; gap:20px;}
+  .foot-social a{color:var(--text-dim); font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;}
+  .foot-social a:hover{color:var(--gold);}
+
+  /* ---------- modal / checkout ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(6,6,7,0.82);
+    display:none; align-items:center; justify-content:center; z-index:200; padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:6px;
+    width:100%; max-width:440px; padding:36px; position:relative;
+  }
+  .modal-close{
+    position:absolute; top:18px; right:18px; background:none; border:none;
+    color:var(--text-dim); font-size:1.3rem; cursor:pointer;
+  }
+  .modal h3{font-family:'Jost',sans-serif; font-weight:500; font-size:1.4rem; margin-bottom:4px;}
+  .modal .modal-event{color:var(--gold); font-size:0.85rem; margin-bottom:22px;}
+  .qty-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .qty-control{display:flex; align-items:center; gap:14px;}
+  .qty-control button{
+    width:32px; height:32px; border-radius:50%; border:1px solid var(--line);
+    background:transparent; color:var(--silver-bright); font-size:1.1rem; cursor:pointer;
+  }
+  .modal-total{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:16px; margin-top:8px; border-top:1px solid var(--line);
+    font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.05em; color:var(--gold);
+  }
+  .modal input[type=text], .modal input[type=email], .modal input[type=tel]{
+    width:100%; margin-bottom:12px;
+  }
+  .pay-btn{
+    width:100%; margin-top:14px; background:var(--gold); color:#0a0a0c; border:none;
+    padding:15px; font-size:0.85rem; letter-spacing:0.14em; text-transform:uppercase;
+    border-radius:2px; cursor:pointer; font-family:'Jost',sans-serif; font-weight:500;
+  }
+  .pay-note{font-size:0.72rem; color:var(--text-dim); margin-top:12px; line-height:1.6;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:880px){
+    nav ul{
+      position:fixed; top:76px; left:0; right:0; background:var(--bg);
+      flex-direction:column; padding:24px 28px; gap:20px;
+      border-bottom:1px solid var(--line);
+      transform:translateY(-130%); transition:transform .3s;
+    }
+    nav ul.open{transform:translateY(0);}
+    .nav-toggle{display:block;}
+    .service-grid, .events-grid, .about-grid, .contact-grid{grid-template-columns:1fr;}
+    .service-card{border-bottom:1px solid var(--line);}
+    .city-row{grid-template-columns:repeat(2,1fr);}
+    .city:nth-child(2){border-right:none;}
+    .city:nth-child(3), .city:nth-child(4){border-top:1px solid var(--line);}
+    .about-grid{gap:36px;}
+    .about-grid img{order:-1;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">
+      <img src="assets/logo.jpeg" alt="HGHVIBES Goa">
+      <span>HGH<em>VIBES</em> GOA</span>
+    </div>
+    <ul id="navLinks">
+      <li><a href="#events">Events</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#cities">Cities</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#events" class="nav-cta">Buy Tickets</a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-sun"></div>
+  <div class="hero-content wrap">
+    <span class="eyebrow">Goa · Bangalore · Mumbai · Hyderabad</span>
+    <h1>WHERE THE <span class="accent">VIBE</span><br>MEETS THE OCCASION</h1>
+    <p class="hero-sub">HGHVIBES Goa curates and produces psytrance, techno, house and Bollywood nights, destination weddings, corporate events and MICE experiences across India's most electric coastline.</p>
+    <div class="hero-ctas">
+      <a href="#events" class="btn btn-primary">Get Tickets</a>
+      <a href="#contact" class="btn btn-ghost">Plan Your Event</a>
+    </div>
+  </div>
+  <div class="genre-strip">
+    <div class="genre-track">
+      <span><em>Psytrance</em>Techno</span>
+      <span><em>House</em>Bollywood Nights</span>
+      <span><em>Destination Weddings</em>Corporate & MICE</span>
+      <span><em>Psytrance</em>Techno</span>
+      <span><em>House</em>Bollywood Nights</span>
+      <span><em>Destination Weddings</em>Corporate & MICE</span>
+    </div>
+  </div>
+</section>
+
+<div class="horizon">
+  <svg width="34" height="34" viewBox="0 0 34 34"><g fill="none" stroke="#c79a56" stroke-width="1.2"><path d="M17 1 L17 33 M1 17 L33 17"/><path d="M17 6 L20 17 L17 28 L14 17 Z" fill="#c79a56" stroke="none"/></g></svg>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What We Do</span>
+      <h2>One Brand, Every Occasion</h2>
+      <p>From sunset dance floors to boardrooms to wedding altars, we handle the full production: concept, permissions, talent, logistics and ticketing.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card reveal">
+        <span class="service-num">01</span>
+        <h3>Music Events</h3>
+        <p>Psytrance, techno, house and Bollywood parties — from beach clubs to warehouse raves — produced end-to-end with artist booking, sound and stage design.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">02</span>
+        <h3>Destination Weddings</h3>
+        <p>Full-scale wedding production in Goa and beyond: venue curation, decor, entertainment and guest experience, designed around your story.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num">03</span>
+        <h3>Corporate & MICE</h3>
+        <p>Conferences, incentive trips, product launches and offsites across Goa, Bangalore, Mumbai and Hyderabad — built for brand impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="horizon">
+  <svg width="34" height="34" viewBox="0 0 34 34"><g fill="none" stroke="#c79a56" stroke-width="1.2"><path d="M17 1 L17 33 M1 17 L33 17"/><path d="M17 6 L20 17 L17 28 L14 17 Z" fill="#c79a56" stroke="none"/></g></svg>
+</div>
+
+<section id="events">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Upcoming</span>
+      <h2>Buy Your Tickets</h2>
+      <p>Secure checkout powered by Razorpay. Select your event, choose your quantity, and you're on the list.</p>
+    </div>
+    <div class="events-grid" id="eventsGrid"></div>
+  </div>
+</section>
+
+<section class="cities" id="cities">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Where We Operate</span>
+      <h2>Four Cities, One Vibe</h2>
+    </div>
+  </div>
+  <div class="city-row">
+    <div class="city reveal"><div class="display">GOA</div><p>Home base · beach & bespoke venues</p></div>
+    <div class="city reveal"><div class="display">BANGALORE</div><p>Corporate & nightlife circuit</p></div>
+    <div class="city reveal"><div class="display">MUMBAI</div><p>Premium events & launches</p></div>
+    <div class="city reveal"><div class="display">HYDERABAD</div><p>MICE & large-format shows</p></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-text reveal">
+      <span class="eyebrow">About HGHVIBES Goa</span>
+      <h2 style="margin-bottom:18px; font-size:clamp(2rem,4vw,2.8rem);">Built By People Who Live On The Dance Floor</h2>
+      <p>We're an event management and marketing company based in Goa, producing everything from underground psytrance nights to five-star destination weddings and corporate MICE programs — across Goa, Bangalore, Mumbai and Hyderabad.</p>
+      <p>Every event carries the same standard: sharp production, real hospitality, and a lineup or itinerary that actually fits the crowd.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="display">4</div><p>Cities</p></div>
+        <div class="stat"><div class="display">100+</div><p>Events Produced</p></div>
+        <div class="stat"><div class="display">3</div><p>Verticals</p></div>
+      </div>
+    </div>
+    <img class="reveal" src="assets/logo.jpeg" alt="HGHVIBES Goa logo">
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Let's Plan Something Unforgettable</h2>
+      <p>Whether it's a festival, a wedding, or your next company offsite — tell us what you're building and we'll take it from there.</p>
+    </div>
+    <form class="reveal" onsubmit="event.preventDefault(); alert('Thanks — this is a demo form. Connect it to your email/CRM backend to receive real enquiries.');">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <select required>
+        <option value="" disabled selected>Enquiry Type</option>
+        <option>Music Event</option>
+        <option>Destination Wedding</option>
+        <option>Corporate / MICE</option>
+        <option>Other</option>
+      </select>
+      <textarea placeholder="Tell us about your event..." required></textarea>
+      <button type="submit" class="btn btn-primary" style="border:none; cursor:pointer;">Send Enquiry</button>
+    </form>
+  </div>
+  <div class="wrap foot-bottom">
+    <p>© 2026 HGHVIBES Goa. All rights reserved.</p>
+    <div class="foot-social">
+      <a href="#">Instagram</a>
+      <a href="#">WhatsApp</a>
+      <a href="#">Email</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ---------- Ticket checkout modal ---------- -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <h3 id="modalEventName">Event Name</h3>
+    <p class="modal-event" id="modalEventMeta">Date · Venue</p>
+    <input type="text" id="buyerName" placeholder="Full Name" required>
+    <input type="email" id="buyerEmail" placeholder="Email Address" required>
+    <input type="tel" id="buyerPhone" placeholder="Phone Number" required>
+    <div class="qty-row">
+      <span>Quantity</span>
+      <div class="qty-control">
+        <button id="qtyMinus" type="button">−</button>
+        <span id="qtyVal">1</span>
+        <button id="qtyPlus" type="button">+</button>
+      </div>
+    </div>
+    <div class="modal-total">
+      <span>Total</span>
+      <span id="modalTotal">₹0</span>
+    </div>
+    <button class="pay-btn" id="payBtn">Pay with Razorpay</button>
+    <p class="pay-note">Test checkout — no real charge is made. In production, the order must be created on your server (with your Razorpay Key Secret) before this Checkout opens, and payment confirmed via webhook.</p>
+  </div>
+</div>
+
+<script>
+  // ---------- nav ----------
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ---------- scroll reveal ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---------- event data ----------
+  const events = [
+    {
+      id:'ev1', name:'Sunset Psytrance — Vagator', tag:'Psytrance',
+      meta:'Sat, 20 Sep · Vagator Beach, Goa', price:1200,
+      gradient:'linear-gradient(135deg, rgba(224,123,63,0.5), rgba(23,23,28,0.3))'
+    },
+    {
+      id:'ev2', name:'Techno Underground', tag:'Techno',
+      meta:'Fri, 3 Oct · Anjuna, Goa', price:1500,
+      gradient:'linear-gradient(135deg, rgba(28,43,58,0.8), rgba(23,23,28,0.3))'
+    },
+    {
+      id:'ev3', name:'Bollywood Beach Night', tag:'Bollywood',
+      meta:'Sat, 11 Oct · Candolim, Goa', price:999,
+      gradient:'linear-gradient(135deg, rgba(199,154,86,0.5), rgba(23,23,28,0.3))'
+    },
+    {
+      id:'ev4', name:'House on the Sands', tag:'House',
+      meta:'Sun, 19 Oct · Morjim, Goa', price:1100,
+      gradient:'linear-gradient(135deg, rgba(160,90,50,0.5), rgba(23,23,28,0.3))'
+    },
+    {
+      id:'ev5', name:'HGHVIBES Bangalore Warehouse', tag:'Techno · House',
+      meta:'Sat, 25 Oct · Bangalore', price:1400,
+      gradient:'linear-gradient(135deg, rgba(28,43,58,0.8), rgba(23,23,28,0.3))'
+    },
+    {
+      id:'ev6', name:'New Year Psy Festival', tag:'Psytrance',
+      meta:'Wed, 31 Dec · Goa', price:2500,
+      gradient:'linear-gradient(135deg, rgba(224,123,63,0.55), rgba(23,23,28,0.3))'
+    }
+  ];
+
+  const grid = document.getElementById('eventsGrid');
+  grid.innerHTML = events.map(ev => `
+    <div class="event-card reveal">
+      <div class="event-banner" style="background:${ev.gradient}">
+        <span class="tag">${ev.tag}</span>
+      </div>
+      <div class="event-body">
+        <h3>${ev.name}</h3>
+        <p class="event-meta">${ev.meta}</p>
+        <div class="event-foot">
+          <span class="event-price">₹${ev.price}</span>
+          <button class="buy-btn" data-id="${ev.id}">Buy Ticket</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---------- ticket modal ----------
+  const overlay = document.getElementById('modalOverlay');
+  const modalEventName = document.getElementById('modalEventName');
+  const modalEventMeta = document.getElementById('modalEventMeta');
+  const modalTotal = document.getElementById('modalTotal');
+  const qtyVal = document.getElementById('qtyVal');
+  let currentEvent = null;
+  let qty = 1;
+
+  function openModal(ev){
+    currentEvent = ev;
+    qty = 1;
+    qtyVal.textContent = qty;
+    modalEventName.textContent = ev.name;
+    modalEventMeta.textContent = ev.meta;
+    modalTotal.textContent = '₹' + (ev.price * qty);
+    overlay.classList.add('open');
+  }
+  function closeModal(){ overlay.classList.remove('open'); }
+
+  document.querySelectorAll('.buy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ev = events.find(e => e.id === btn.dataset.id);
+      openModal(ev);
+    });
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+
+  document.getElementById('qtyMinus').addEventListener('click', () => {
+    if(qty > 1) qty--;
+    qtyVal.textContent = qty;
+    modalTotal.textContent = '₹' + (currentEvent.price * qty);
+  });
+  document.getElementById('qtyPlus').addEventListener('click', () => {
+    if(qty < 10) qty++;
+    qtyVal.textContent = qty;
+    modalTotal.textContent = '₹' + (currentEvent.price * qty);
+  });
+
+  // ---------- Razorpay checkout ----------
+  document.getElementById('payBtn').addEventListener('click', () => {
+    const name = document.getElementById('buyerName').value.trim();
+    const email = document.getElementById('buyerEmail').value.trim();
+    const phone = document.getElementById('buyerPhone').value.trim();
+    if(!name || !email || !phone){
+      alert('Please fill in your name, email and phone number.');
+      return;
+    }
+    const amountPaise = currentEvent.price * qty * 100;
+
+    // NOTE FOR PRODUCTION:
+    // Razorpay requires an `order_id` generated server-side via the Orders API
+    // (using your Key Secret, which must never live in frontend code).
+    // Replace this demo `options` object with one that includes the real
+    // order_id returned from your backend, and verify the payment signature
+    // server-side on the `handler` callback before confirming the ticket.
+    const options = {
+      key: 'rzp_test_YOUR_KEY_ID', // <-- replace with your Razorpay Key ID
+      amount: amountPaise,
+      currency: 'INR',
+      name: 'HGHVIBES Goa',
+      description: currentEvent.name + ' — ' + qty + ' ticket(s)',
+      image: 'assets/logo.jpeg',
+      prefill: { name, email, contact: phone },
+      theme: { color: '#c79a56' },
+      handler: function(response){
+        alert('Payment successful! Payment ID: ' + response.razorpay_payment_id + '\\n\\n(Demo mode — confirm & issue the ticket from your backend after verifying this payment.)');
+        closeModal();
+      },
+      modal: { ondismiss: function(){} }
+    };
+
+    if(typeof Razorpay === 'undefined'){
+      alert('Razorpay script did not load — check your network connection.');
+      return;
+    }
+    const rzp = new Razorpay(options);
+    rzp.open();
+  });
+</script>
+</body>
+</html>
